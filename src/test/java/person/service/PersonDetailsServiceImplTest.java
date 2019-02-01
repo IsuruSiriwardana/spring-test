@@ -1,16 +1,13 @@
-package isuru.test.springtest.service;
+package person.service;
 
-import isuru.test.springtest.model.PersonDetails;
-import isuru.test.springtest.service.PersonDetailService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
+import person.model.PersonDetails;
 
 import java.util.List;
 
@@ -35,5 +32,4 @@ public class PersonDetailsServiceImplTest {
 		List<PersonDetails> personDetails = personDetailService.loadAllPersonDetails();
 		Assert.assertEquals("Number of person details received does not match the expected value", 4, personDetails.size());
 	}
-
 }

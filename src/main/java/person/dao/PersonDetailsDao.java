@@ -1,6 +1,6 @@
-package isuru.test.springtest.dao;
+package person.dao;
 
-import isuru.test.springtest.model.PersonDetails;
+import person.model.PersonDetails;
 
 import java.util.List;
 

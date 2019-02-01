@@ -1,6 +1,6 @@
-package isuru.test.springtest.dao;
+package person.dao;
 
-import isuru.test.springtest.model.PersonDetails;
+import person.model.PersonDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
@@ -25,22 +25,19 @@ public class PersonDetailsDaoImpl extends JdbcDaoSupport implements PersonDetail
 
     public List<PersonDetails> loadAllPersonDetails() {
         String sql = "select name, age, gender, date_of_birth, address from person_details";
-        List<PersonDetails> query = getJdbcTemplate().query(sql, new PersonDetailRowMapper());
-        return query;
+        return getJdbcTemplate().query(sql, new PersonDetailRowMapper());
     }
 
     public void insertPersonDetails(PersonDetails personDetails) {
         String sql = "insert into person_details (name, age, gender, date_of_birth, address) values (?, ?, ?, ?, ?)";
-        getJdbcTemplate().update(sql, new Object[]{
+        getJdbcTemplate().update(sql,
                 personDetails.getName(),
                 personDetails.getAge(),
                 personDetails.getGender(),
                 personDetails.getDateOfBirth(),
                 personDetails.getAddress()
-        });
+        );
     }
-
-
 }
 
 class PersonDetailRowMapper implements RowMapper<PersonDetails> {

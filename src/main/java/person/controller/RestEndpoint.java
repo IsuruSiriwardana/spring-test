@@ -1,7 +1,9 @@
-package isuru.test.springtest.controller;
+package person.controller;
 
-import isuru.test.springtest.model.PersonDetails;
-import isuru.test.springtest.service.PersonDetailService;
+import person.model.PersonDetails;
+import person.service.PersonDetailService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,8 @@ import java.util.Optional;
 @Controller
 public class RestEndpoint {
 
+    private static final Logger log = LoggerFactory.getLogger(RestEndpoint.class);
+
     @Autowired
     protected PersonDetailService personDetailService;
 
@@ -31,15 +35,17 @@ public class RestEndpoint {
             @RequestParam(name = "address", required = false) String address
 
     ) {
-        System.out.println("Received hello from: " + name);
+        log.info("Received hello from: {}", name);
         DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
         Date dateOfBirthValue = null;
         try {
             dateOfBirthValue = df.parse(dateOfBirth);
-        }catch (Exception ex){}
+        }catch (Exception ex){
+            log.error("Invalid date format found: ", ex);
+        }
         personDetailService.insert(new PersonDetails(name, age, gender, dateOfBirthValue, address));
         List<PersonDetails> personDetails = personDetailService.loadAllPersonDetails();
-        System.out.println("Done: " + personDetails.size());
+        log.info("Done: {}", personDetails.size());
         return ResponseEntity.of(Optional.of(personDetails.size()));
     }
 

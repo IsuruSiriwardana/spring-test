@@ -1,7 +1,7 @@
-package isuru.test.springtest.service;
+package person.service;
 
-import isuru.test.springtest.dao.PersonDetailsDao;
-import isuru.test.springtest.model.PersonDetails;
+import person.dao.PersonDetailsDao;
+import person.model.PersonDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
